@@ -1,0 +1,114 @@
+.history-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 25px 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.history-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0f172a;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  margin-top: 10px;
+}
+
+.history-table th {
+  background: #f1f5f9;
+  text-align: left;
+  padding: 12px 16px;
+  color: #334155;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.history-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #1e293b;
+}
+
+.history-table tbody tr:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.no-data {
+  text-align: center;
+  color: #64748b;
+  padding: 16px 0;
+}
+
+/* 🎖 Role badges */
+.role-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-admin {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.role-vip {
+  background-color: #fef3c7;
+  color: #ca8a04;
+}
+
+.role-normal {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+/* 🟩 Status badges */
+.status-badge {
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-submitted {
+  color: #16a34a;
+}
+
+.status-inprogress {
+  color: #eab308;
+}
+
+.status-pending {
+  color: #64748b;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .history-table th,
+  .history-table td {
+    padding: 10px;
+    font-size: 0.85rem;
+  }
+}
