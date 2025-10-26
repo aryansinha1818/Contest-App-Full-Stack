@@ -11,7 +11,7 @@ export default function ContestDetail() {
   useEffect(() => {
     (async () => {
       const res = await get(`/contests?id=${id}`);
-      // NOTE: backend /contests endpoint returns list — we try to find the matching one
+
       const found =
         (res.contests || []).find((c) => c._id === id) || res.contest;
       setContest(found);

@@ -85,7 +85,6 @@
   color: #16a34a;
 }
 
-/* 🟩 Status badges */
 .status-badge {
   font-weight: 600;
   text-transform: capitalize;
@@ -103,7 +102,6 @@
   color: #64748b;
 }
 
-/* 📱 Responsive */
 @media (max-width: 768px) {
   .history-table th,
   .history-table td {
