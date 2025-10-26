@@ -21,7 +21,7 @@ export default function ContestDetail() {
   const toggle = (qId, opt) => {
     setAnswers((prev) => {
       const sel = prev[qId] || [];
-      const isMulti = true; // assume MULTI allowed — UI simple
+      const isMulti = true;
       if (isMulti) {
         const next = sel.includes(opt)
           ? sel.filter((x) => x !== opt)

@@ -5,7 +5,6 @@ const Submission = require("../models/submission.model");
 const { calculateScore } = require("../services/scoring.service");
 const User = require("../models/user.model");
 
-// ✅ Create contest (Admin only)
 const createContest = async (req, res) => {
   try {
     const { name, description, type, startTime, endTime, prize } = req.body;
@@ -29,7 +28,6 @@ const createContest = async (req, res) => {
   }
 };
 
-// ✅ Add question
 const addQuestion = async (req, res) => {
   try {
     const { contestId } = req.params;
@@ -64,10 +62,9 @@ const addQuestion = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
-// ✅ Get contests (filtered by role, supports guests)
+
 const getContests = async (req, res) => {
   try {
-    // 🟢 Handle logged-in or guest users
     const userId = req.user ? req.user.id : null;
     let user = null;
 
@@ -82,20 +79,16 @@ const getContests = async (req, res) => {
       query = { type: "NORMAL" };
     } else if (user && user.role === "VIP") {
       query = { type: { $in: ["NORMAL", "VIP"] } };
-    }
-    // 🟢 Guests (no login) can see all public contests
-    else if (!user) {
-      query = {}; // or add `{ isPublic: true }` if your model supports it
+    } else if (!user) {
+      query = {};
     }
 
     const contests = await Contest.find(query).lean();
 
-    // 🟢 For guests, just send contests directly
     if (!user) {
       return res.status(200).json({ contests });
     }
 
-    // 🟢 For logged-in users, include their contest statuses
     const submissions = await Submission.find({ user: userId });
     const contestStatuses = {};
     submissions.forEach((sub) => {
@@ -114,7 +107,6 @@ const getContests = async (req, res) => {
   }
 };
 
-// ✅ Participate in a contest
 const participateInContest = async (req, res) => {
   try {
     const { id: contestId } = req.params;
@@ -146,8 +138,6 @@ const participateInContest = async (req, res) => {
   }
 };
 
-// ✅ Submit contest (calculate score)
-// ✅ Submit contest (calculate score)
 const submitContest = async (req, res) => {
   try {
     const { contestId, answers } = req.body;
@@ -190,7 +180,6 @@ const submitContest = async (req, res) => {
   }
 };
 
-// ✅ Get questions for a contest
 const getQuestionsByContest = async (req, res) => {
   try {
     const { contestId } = req.params;
@@ -201,7 +190,6 @@ const getQuestionsByContest = async (req, res) => {
   }
 };
 
-// ✅ Save progress and mark answered questions as locked
 const saveContestProgress = async (req, res) => {
   try {
     const { contestId, answers } = req.body;
@@ -211,7 +199,6 @@ const saveContestProgress = async (req, res) => {
       return res.status(400).json({ message: "Contest ID is required" });
     }
 
-    // Fetch or create a submission
     let submission = await Submission.findOne({
       user: userId,
       contest: contestId,
@@ -227,22 +214,18 @@ const saveContestProgress = async (req, res) => {
       });
     }
 
-    // 🔹 Merge new answers into old ones (lock once answered)
     const answerMap = new Map();
 
-    // Add old answers (already locked)
     for (const a of submission.answers) {
       answerMap.set(a.question, a.selected);
     }
 
-    // Add new answers (only if not already locked)
     for (const a of answers) {
       if (!answerMap.has(a.question)) {
         answerMap.set(a.question, a.selected);
       }
     }
 
-    // Convert back to array
     submission.answers = Array.from(answerMap, ([question, selected]) => ({
       question,
       selected,
@@ -255,7 +238,7 @@ const saveContestProgress = async (req, res) => {
     res.status(200).json({
       message: "Progress saved successfully",
       status: submission.status,
-      lockedQuestions: Array.from(answerMap.keys()), // send locked question IDs
+      lockedQuestions: Array.from(answerMap.keys()),
     });
   } catch (error) {
     console.error("Error saving progress:", error);
@@ -263,7 +246,6 @@ const saveContestProgress = async (req, res) => {
   }
 };
 
-// ✅ Delete a question
 const deleteQuestion = async (req, res) => {
   try {
     const { questionId } = req.params;

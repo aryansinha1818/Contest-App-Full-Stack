@@ -28,7 +28,6 @@ body {
   padding: 0 16px;
 }
 
-/* NAV */
 .nav {
   display: flex;
   justify-content: space-between;
@@ -54,7 +53,6 @@ body {
   margin-left: 12px;
 }
 
-/* Buttons */
 .btn {
   background: var(--accent);
   color: white;
@@ -69,7 +67,6 @@ body {
   color: var(--text);
 }
 
-/* Cards and grid */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -108,7 +105,6 @@ body {
   text-decoration: none;
 }
 
-/* Auth */
 .auth-card {
   max-width: 480px;
   margin: 40px auto;
@@ -137,7 +133,6 @@ body {
   margin-top: 8px;
 }
 
-/* Tables */
 .table {
   margin-top: 12px;
 }
@@ -153,7 +148,6 @@ body {
   color: var(--muted);
 }
 
-/* Question UI */
 .qa .q {
   background: var(--card);
   padding: 12px;
@@ -214,8 +208,6 @@ body {
   gap: 20px;
 }
 
-/* --- Fix overlapping layout and improve spacing --- */
-
 .contest-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -228,7 +220,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  padding-bottom: 60px; /* add space for buttons at the bottom */
+  padding-bottom: 60px;
 }
 
 .contest-details {
@@ -273,7 +265,6 @@ body {
   align-items: center;
 }
 
-/* Bigger, cleaner textarea for question input */
 .question-textbox {
   width: 100%;
   resize: vertical;
@@ -288,7 +279,7 @@ body {
 }
 
 .question-textbox:focus {
-  border-color: #14b8a6; /* teal accent */
+  border-color: #14b8a6;
   box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
   outline: none;
 }
@@ -353,16 +344,14 @@ body {
   transform: scale(1.2);
 }
 
-/* Make VIP and Normal contests visually distinct */
 .card.VIP {
-  border: 1.5px solid #eab308; /* gold border for VIP */
+  border: 1.5px solid #eab308;
 }
 
 .card.NORMAL {
-  border: 1.5px solid #14b8a6; /* teal border for normal contests */
+  border: 1.5px solid #14b8a6;
 }
 
-/* Ensure cards look clean */
 .contest-card {
   position: relative;
   display: flex;
@@ -397,7 +386,6 @@ body {
   gap: 24px;
 }
 
-/* ===== Refined Navbar Design ===== */
 .navbar {
   display: flex;
   align-items: center;
@@ -437,7 +425,6 @@ nav a:hover {
   color: var(--accent);
 }
 
-/* ===== User Box ===== */
 .user-box {
   display: flex;
   align-items: center;
@@ -454,7 +441,6 @@ nav a:hover {
   transform: translateY(-1px);
 }
 
-/* Avatar Circle */
 .user-initial {
   width: 34px;
   height: 34px;
@@ -468,7 +454,6 @@ nav a:hover {
   text-transform: uppercase;
 }
 
-/* User text info */
 .user-details {
   display: flex;
   flex-direction: column;
@@ -488,7 +473,6 @@ nav a:hover {
   font-weight: 500;
 }
 
-/* Logout icon */
 .logout-btn {
   border: none;
   background: none;

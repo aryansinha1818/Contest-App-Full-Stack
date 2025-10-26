@@ -26,7 +26,6 @@ const optionalAuth = (req, res, next) => {
   next();
 };
 
-// 🟢 NEW: Admin-only authorization middleware
 const authorizeAdmin = (req, res, next) => {
   if (!req.user || req.user.role !== "ADMIN") {
     return res.status(403).json({ message: "Access denied: Admins only" });

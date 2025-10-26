@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { get, post } from "../api";
-// const { id: contestId } = useParams();
-
-// const res = await post(
-//   "/contests/save-progress",
-//   {
-//     contestId,
-//     answers: Object.entries(answers).map(([question, selected]) => ({
-//       question,
-//       selected,
-//     })),
-//   },
-//   token
-// );
 
 export default function ContestQuestions() {
   const { id: contestId } = useParams();
@@ -31,7 +18,6 @@ export default function ContestQuestions() {
       try {
         const data = await get(`/contests/${contestId}/questions`, token);
 
-        // Fetch saved progress separately
         const progressRes = await get(`/users/history`, token);
 
         const userProgress = progressRes.inProgress?.find(
@@ -60,9 +46,7 @@ export default function ContestQuestions() {
     fetchQuestions();
   }, [contestId]);
 
-  // 🧩 Change handler
   const handleOptionChange = (qid, option, type) => {
-    // Prevent change if question already locked or entire contest locked
     if (fullyLocked || lockedQuestions.has(qid)) return;
 
     setAnswers((prev) => {
@@ -77,7 +61,6 @@ export default function ContestQuestions() {
     });
   };
 
-  // 💾 Save progress and exit
   const handleExit = async () => {
     const confirmExit = window.confirm(
       "Are you sure you want to exit? Your progress will be saved."
@@ -109,7 +92,6 @@ export default function ContestQuestions() {
     }
   };
 
-  // ✅ Submit contest
   const handleSubmit = async () => {
     if (fullyLocked) return;
     try {
@@ -123,7 +105,6 @@ export default function ContestQuestions() {
     }
   };
 
-  // 🔒 Check if specific question should be locked
   const isQuestionLocked = (qid) => {
     return fullyLocked || lockedQuestions.has(qid);
   };

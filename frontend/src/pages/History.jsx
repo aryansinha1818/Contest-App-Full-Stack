@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../api";
-import "../History.css"; // ✅ Add this line for custom styling
+import "../History.css";
 
 export default function History() {
   const [data, setData] = useState(null);
@@ -39,7 +39,6 @@ export default function History() {
         {isAdmin ? "All Users' Contest History" : "My Contest History"}
       </h2>
 
-      {/* ✅ ADMIN VIEW */}
       {isAdmin ? (
         <div className="table-wrapper">
           <table className="history-table">
@@ -101,7 +100,6 @@ export default function History() {
         </div>
       ) : (
         <>
-          {/* ✅ VIP / NORMAL VIEW */}
           {data.inProgress?.length > 0 && (
             <>
               <h3 className="section-subtitle">In-Progress Contests</h3>

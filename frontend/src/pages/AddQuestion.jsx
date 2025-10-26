@@ -13,7 +13,7 @@ export default function AddQuestion() {
   });
   const [msg, setMsg] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [editingId, setEditingId] = useState(null); // ✅ NEW: track which question is being edited
+  const [editingId, setEditingId] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -21,14 +21,12 @@ export default function AddQuestion() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // ✅ Load all questions for this contest
   const loadQuestions = async () => {
     if (!contestId) return;
     const res = await get(`/contests/${contestId}/questions`, token);
     if (res.questions) setQuestions(res.questions);
   };
 
-  // ✅ Add or update question
   const submit = async (e) => {
     e.preventDefault();
 
@@ -40,7 +38,6 @@ export default function AddQuestion() {
     };
 
     if (editingId) {
-      // 🟡 Update existing question
       const res = await fetch(
         `http://localhost:5050/api/admin/question/${editingId}`,
         {
@@ -62,7 +59,6 @@ export default function AddQuestion() {
         setMsg(data.error || "Failed to update question");
       }
     } else {
-      // 🟢 Add new question (existing working logic)
       const res = await post(
         `/contests/${form.contestId}/question`,
         payload,
@@ -78,7 +74,6 @@ export default function AddQuestion() {
     }
   };
 
-  // ✅ Delete question
   const handleDelete = async (questionId) => {
     if (!window.confirm("Are you sure you want to delete this question?"))
       return;
@@ -94,7 +89,6 @@ export default function AddQuestion() {
     }
   };
 
-  // ✅ Enter edit mode
   const handleEdit = (q) => {
     setEditingId(q._id);
     setForm({
@@ -189,7 +183,6 @@ export default function AddQuestion() {
         </div>
       )}
 
-      {/* 🧩 List of existing questions (visible to admin always) */}
       <div style={{ marginTop: "30px" }}>
         <h3>Existing Questions</h3>
         {questions.length > 0 ? (

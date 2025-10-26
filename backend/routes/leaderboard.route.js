@@ -4,7 +4,7 @@ const {
   getLeaderboard,
   getTopScorer,
   getUserHistory,
-  deleteResult, // 🟢 Add new controller
+  deleteResult,
 } = require("../controllers/leaderboard.controller");
 
 const {
@@ -12,12 +12,10 @@ const {
   authorizeAdmin,
 } = require("../middlewares/auth.middleware");
 
-// ✅ Existing routes
 router.get("/", authenticate, getLeaderboard);
 router.get("/:contestId/top", authenticate, getTopScorer);
 router.get("/user/history", authenticate, getUserHistory);
 
-// 🟢 NEW: Delete leaderboard result (Admin only)
 router.delete("/:id", authenticate, authorizeAdmin, deleteResult);
 
 module.exports = router;

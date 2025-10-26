@@ -1,6 +1,6 @@
 const express = require("express");
 const { authenticate } = require("../middlewares/auth.middleware");
-const roleMiddleware = require("../middlewares/role.middleware"); // ✅ correct import
+const roleMiddleware = require("../middlewares/role.middleware");
 const Contest = require("../models/contest.model");
 const Question = require("../models/question.model");
 const Submission = require("../models/submission.model");
@@ -8,7 +8,6 @@ const User = require("../models/user.model");
 
 const router = express.Router();
 
-// 🔹 GET overall admin stats
 router.get(
   "/stats",
   authenticate,
@@ -45,7 +44,6 @@ router.get(
   }
 );
 
-// 🔹 DELETE Contest (Admin only)
 router.delete(
   "/contest/:id",
   authenticate,
@@ -60,7 +58,6 @@ router.delete(
   }
 );
 
-// 🔹 DELETE Question (Admin only)
 router.delete(
   "/question/:id",
   authenticate,
@@ -75,7 +72,6 @@ router.delete(
   }
 );
 
-// 🔹 DELETE User (Admin only)
 router.delete(
   "/user/:id",
   authenticate,
@@ -83,7 +79,7 @@ router.delete(
   async (req, res) => {
     try {
       await User.findByIdAndDelete(req.params.id);
-      await Submission.deleteMany({ user: req.params.id }); // cleanup related submissions
+      await Submission.deleteMany({ user: req.params.id });
       res.json({
         message: "User and related submissions deleted successfully",
       });
@@ -93,7 +89,6 @@ router.delete(
   }
 );
 
-// 🔹 DELETE Submission (Admin only)
 router.delete(
   "/submission/:id",
   authenticate,
@@ -108,7 +103,6 @@ router.delete(
   }
 );
 
-// 🔹 UPDATE Question (Admin only)
 router.put(
   "/question/:id",
   authenticate,

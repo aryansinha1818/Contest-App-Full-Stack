@@ -8,10 +8,8 @@ const {
 
 const router = express.Router();
 
-// ✅ Admin-only route to get all users
 router.get("/", authenticate, roleMiddleware(["ADMIN"]), getAllUsers);
 
-// ✅ Logged-in users can view their own history
 router.get("/history", authenticate, getUserHistory);
 
 module.exports = router;

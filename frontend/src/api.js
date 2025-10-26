@@ -1,4 +1,3 @@
-// Simple API helper. Edit BASE if your backend changes.
 export const BASE =
   import.meta.env.VITE_API_BASE || "http://localhost:5050/api";
 

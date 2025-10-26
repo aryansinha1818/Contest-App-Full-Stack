@@ -16,7 +16,6 @@ export default function Login() {
       const res = await post("/auth/login", { email, password });
 
       if (res?.token && res?.user) {
-        // ✅ Store token + full user info correctly
         localStorage.setItem("token", res.token);
         localStorage.setItem("user", JSON.stringify(res.user));
         window.dispatchEvent(new Event("userUpdated"));

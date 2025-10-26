@@ -63,7 +63,6 @@ export default function App() {
             }
           />
 
-          {/* ✅ Add both routes (generic + contest-specific) */}
           <Route
             path="/add-question"
             element={

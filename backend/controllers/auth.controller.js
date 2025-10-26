@@ -9,12 +9,9 @@ const register = async (req, res) => {
     if (existing)
       return res.status(400).json({ message: "Email already registered" });
 
-    // 🧩 Check if an admin already exists
     const adminExists = await User.exists({ role: "ADMIN" });
 
-    // If trying to register as ADMIN
     if (role === "ADMIN") {
-      // Case 1: No admin exists yet → allow (first setup)
       if (!adminExists) {
         const user = await User.create({ name, email, password, role });
         return res
@@ -22,7 +19,6 @@ const register = async (req, res) => {
           .json({ message: "First Admin created successfully", user });
       }
 
-      // Case 2: Admin exists, but this request is NOT from an authenticated Admin
       const authHeader = req.headers.authorization;
       if (!authHeader)
         return res
@@ -32,20 +28,16 @@ const register = async (req, res) => {
       const token = authHeader.split(" ")[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       if (decoded.role !== "ADMIN")
-        return res
-          .status(403)
-          .json({
-            message: "Access denied: only Admins can create another Admin",
-          });
+        return res.status(403).json({
+          message: "Access denied: only Admins can create another Admin",
+        });
 
-      // Case 3: Request is from logged-in Admin
       const user = await User.create({ name, email, password, role });
       return res
         .status(201)
         .json({ message: "Admin created successfully", user });
     }
 
-    // 🧩 For Normal / VIP users → normal registration
     const user = await User.create({ name, email, password, role });
     res.status(201).json({ message: "User registered successfully", user });
   } catch (err) {

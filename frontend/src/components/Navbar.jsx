@@ -5,7 +5,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
-  // ✅ Load user when component mounts
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
@@ -16,7 +15,6 @@ export default function Navbar() {
       }
     }
 
-    // ✅ Listen for user updates (login/logout)
     const handleUserUpdate = () => {
       const updatedUser = localStorage.getItem("user");
       setUser(updatedUser ? JSON.parse(updatedUser) : null);
@@ -30,7 +28,7 @@ export default function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    window.dispatchEvent(new Event("userUpdated")); // 🔥 Tell all components user changed
+    window.dispatchEvent(new Event("userUpdated"));
     setUser(null);
     navigate("/login");
   };
@@ -61,7 +59,6 @@ export default function Navbar() {
           <Link to="/contests">Contests</Link>
           <Link to="/leaderboard">Leaderboard</Link>
 
-          {/* 🟢 ADDED: History tab visible for ALL users */}
           {user && <Link to="/history">History</Link>}
 
           {user?.role === "ADMIN" && (

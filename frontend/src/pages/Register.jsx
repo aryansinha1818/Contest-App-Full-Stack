@@ -21,7 +21,6 @@ export default function Register() {
   const [adminExists, setAdminExists] = useState(true);
 
   useEffect(() => {
-    // Check if an admin exists (backend will return true/false)
     fetch("http://localhost:5050/api/auth/check-admin")
       .then((res) => res.json())
       .then((data) => setAdminExists(data.exists))

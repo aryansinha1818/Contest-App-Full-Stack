@@ -14,7 +14,6 @@ const authLimiter = rateLimit({
 router.post("/register", authLimiter, register);
 router.post("/login", authLimiter, login);
 
-// ✅ Add this route
 router.get("/check-admin", async (req, res) => {
   try {
     const exists = await User.exists({ role: "ADMIN" });

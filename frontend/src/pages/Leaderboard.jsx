@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { get, del } from "../api";
 
 export default function Leaderboard() {
-  const [leaderboard, setLeaderboard] = useState([]); // ✅ ensure array
+  const [leaderboard, setLeaderboard] = useState([]);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,6 @@ export default function Leaderboard() {
       try {
         const res = await get("/leaderboard", token);
 
-        // ✅ FIX: Always use array, no matter backend format
         if (Array.isArray(res)) {
           setLeaderboard(res);
         } else if (Array.isArray(res.leaderboard)) {
@@ -31,7 +30,6 @@ export default function Leaderboard() {
     fetchLeaderboard();
   }, []);
 
-  // 🧩 Handle Delete (Admin only)
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this result?"
@@ -73,7 +71,6 @@ export default function Leaderboard() {
                 <td>{entry.contest?.name || "Unknown Contest"}</td>
                 <td>{entry.score}</td>
 
-                {/* 🟢 Delete button visible only for Admin */}
                 {user?.role === "ADMIN" && (
                   <td>
                     <button

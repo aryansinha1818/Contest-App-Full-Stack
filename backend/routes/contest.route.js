@@ -13,8 +13,7 @@ const {
   authenticate,
   optionalAuth,
 } = require("../middlewares/auth.middleware");
-const roleMiddleware = require("../middlewares/role.middleware"); // ✅ Correct import
-
+const roleMiddleware = require("../middlewares/role.middleware");
 const router = express.Router();
 
 router.get("/", optionalAuth, getContests);

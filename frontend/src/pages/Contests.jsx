@@ -4,12 +4,12 @@ import { get } from "../api";
 
 export default function Contests() {
   const [contests, setContests] = useState([]);
-  const [user, setUser] = useState(null); // ✅ added
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    const userData = JSON.parse(localStorage.getItem("user") || "null"); // ✅ load user safely
+    const userData = JSON.parse(localStorage.getItem("user") || "null");
     setUser(userData);
 
     const fetchContests = async () => {
@@ -58,7 +58,6 @@ export default function Contests() {
     }
   };
 
-  // ✅ Updated condition: show contests even if user not logged in
   return (
     <section className="container">
       <h2>Available Contests</h2>
@@ -71,7 +70,6 @@ export default function Contests() {
               <p>{c.description}</p>
               <div className="contest-id">Contest ID: {c._id}</div>
 
-              {/* ✅ Show only contest info if no user logged in */}
               {!user ? (
                 <p style={{ color: "#888", marginTop: "8px" }}>
                   Login to participate or manage contests.
